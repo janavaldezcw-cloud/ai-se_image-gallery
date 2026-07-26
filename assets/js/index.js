@@ -1,36 +1,27 @@
 import { images } from "./images.js";
 import { renderCarouselView } from "./carousel.js";
+import { renderDecksView } from "./decks-view.js";
+import { renderDeckView, findDeckById } from "./deck-view.js";
+import { confirmDelete } from "./confirmation-modal.js";
 
 const homeSection = document.querySelector("#home");
+const decksSection = document.querySelector("#decks");
 const carouselSection = document.querySelector("#carousel");
+const deckViewSection = document.querySelector("#deck-view");
 const notFoundSection = document.querySelector("#not-found");
 
-const confirmationModalEl = document.querySelector("#confirmation-modal");
-const cancelBtn = confirmationModalEl.querySelector(".modal__btn_type_cancel");
-const confirmBtn = confirmationModalEl.querySelector(
-  ".modal__btn_type_confirm",
-);
+let currentDeck = null;
 
-let currentImageEl = null;
-
-cancelBtn.addEventListener("click", () => {
-  confirmationModalEl.classList.remove("modal_visible");
-  currentImageEl = null;
-});
-
-confirmBtn.addEventListener("click", () => {
-  currentImageEl.remove();
-  confirmationModalEl.classList.remove("modal_visible");
-  currentImageEl = null;
+const practiceBtn = deckViewSection.querySelector(".gallery__practice-btn");
+practiceBtn.addEventListener("click", () => {
+  if (currentDeck) {
+    window.location.hash = `deck/${currentDeck.id}/practice`;
+  }
 });
 
 function renderHomeView() {
-  homeSection.style.display = "block";
-  carouselSection.style.display = "none";
-  notFoundSection.style.display = "none";
-
   const imageTemplateEl = document.querySelector("#image-template");
-  const imageContainerEl = document.querySelector(".gallery__list");
+  const imageContainerEl = homeSection.querySelector(".gallery__list");
   imageContainerEl.innerHTML = "";
 
   function createImageEl(item) {
@@ -47,8 +38,7 @@ function renderHomeView() {
 
     const deleteBtn = cloneEl.querySelector(".card__btn_type_delete");
     deleteBtn.addEventListener("click", () => {
-      currentImageEl = cloneEl;
-      confirmationModalEl.classList.add("modal_visible");
+      confirmDelete(cloneEl);
     });
 
     return cloneEl;
@@ -62,28 +52,50 @@ function renderHomeView() {
   images.forEach(renderImageEl);
 }
 
-function renderNotFoundView() {
-  homeSection.style.display = "none";
-  carouselSection.style.display = "none";
-  notFoundSection.style.display = "flex";
-}
-
 /**
  * Main router function that handles hash changes.
  * Reads the current hash and renders the appropriate view.
  */
 function router() {
   const hash = window.location.hash.slice(1) || "home";
+  const practiceMatch = hash.match(/^deck\/(.+)\/practice$/);
+  const deckMatch = hash.match(/^deck\/(.+)$/);
+
+  homeSection.style.display = "none";
+  decksSection.style.display = "none";
+  carouselSection.style.display = "none";
+  deckViewSection.style.display = "none";
+  notFoundSection.style.display = "none";
 
   if (hash === "home" || hash === "") {
+    homeSection.style.display = "block";
     renderHomeView();
+  } else if (hash === "decks") {
+    decksSection.style.display = "block";
+    renderDecksView();
   } else if (hash === "carousel") {
-    homeSection.style.display = "none";
     carouselSection.style.display = "block";
-    notFoundSection.style.display = "none";
     renderCarouselView(images);
+  } else if (practiceMatch) {
+    const deck = findDeckById(practiceMatch[1]);
+    if (deck) {
+      currentDeck = deck;
+      carouselSection.style.display = "block";
+      renderCarouselView(deck.cards);
+    } else {
+      notFoundSection.style.display = "flex";
+    }
+  } else if (deckMatch) {
+    const deck = findDeckById(deckMatch[1]);
+    if (deck) {
+      currentDeck = deck;
+      deckViewSection.style.display = "block";
+      renderDeckView(deck);
+    } else {
+      notFoundSection.style.display = "flex";
+    }
   } else {
-    renderNotFoundView();
+    notFoundSection.style.display = "flex";
   }
 }
 

@@ -15,6 +15,7 @@
   align-items: center;
   gap: 20px;
   grid-template-areas: "left-btn card right-btn";
+  grid-template-columns: auto minmax(0, 390px) auto;
 }
 
 .carousel__btn {
@@ -77,6 +78,22 @@
   display: block;
 }
 
+.carousel__text {
+  grid-area: card;
+  max-width: 390px;
+  min-height: 273px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 16px;
+  background-color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media screen and (max-width: 600px) {
   .carousel {
     padding: 0;
@@ -91,5 +108,6 @@
     grid-template-areas:
       "card card"
       "left-btn right-btn";
+    grid-template-columns: minmax(0, 195px) minmax(0, 195px);
   }
 }

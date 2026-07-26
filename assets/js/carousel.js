@@ -1,10 +1,11 @@
-function renderCarouselView(images) {
+function renderCarouselView(items) {
   let currentIndex = 0;
 
   const carouselEl = document.querySelector(".carousel");
   const leftBtn = carouselEl.querySelector(".carousel__btn_type_left");
   const rightBtn = carouselEl.querySelector(".carousel__btn_type_right");
   const carouselImageEl = carouselEl.querySelector(".carousel__image");
+  const carouselTextEl = carouselEl.querySelector(".carousel__text");
 
   function disableButton(buttonEl) {
     buttonEl.classList.add("carousel__btn_disabled");
@@ -22,7 +23,7 @@ function renderCarouselView(images) {
       enableButton(leftBtn);
     }
 
-    if (currentIndex === images.length - 1) {
+    if (currentIndex === items.length - 1) {
       disableButton(rightBtn);
     } else {
       enableButton(rightBtn);
@@ -30,13 +31,24 @@ function renderCarouselView(images) {
   }
 
   function updateDisplay() {
-    carouselImageEl.src = images[currentIndex].src;
-    carouselImageEl.alt = images[currentIndex].alt;
+    const item = items[currentIndex];
+
+    if (item.src) {
+      carouselImageEl.src = item.src;
+      carouselImageEl.alt = item.alt;
+      carouselImageEl.style.display = "block";
+      carouselTextEl.style.display = "none";
+    } else {
+      carouselTextEl.textContent = item.front;
+      carouselTextEl.style.display = "flex";
+      carouselImageEl.style.display = "none";
+    }
+
     updateArrows();
   }
 
   rightBtn.addEventListener("click", () => {
-    if (currentIndex < images.length - 1) {
+    if (currentIndex < items.length - 1) {
       currentIndex++;
       updateDisplay();
     }

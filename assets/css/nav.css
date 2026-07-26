@@ -15,8 +15,14 @@
   text-decoration: underline;
 }
 
+@media screen and (max-width: 600px) {
+  .nav__links {
+    gap: 16px;
+  }
+}
+
 @media screen and (max-width: 360px) {
   .nav__links {
-    gap: 18px;
+    gap: 12px;
   }
 }

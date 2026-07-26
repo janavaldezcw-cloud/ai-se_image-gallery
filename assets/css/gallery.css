@@ -12,6 +12,35 @@
   list-style-type: none;
 }
 
+.gallery__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.gallery__header .gallery__title {
+  margin-bottom: 0;
+}
+
+.gallery__practice-btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  background-color: #1a1a1a;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.gallery__practice-btn:hover {
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.24) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  background-blend-mode: overlay;
+}
+
 .gallery__new-card-btn {
   aspect-ratio: 325 / 224;
   border-radius: 12px;
