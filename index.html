@@ -31,7 +31,7 @@
         <h2 class="gallery__title">My Images</h2>
         <div class="wrapping-row">
           <ul class="gallery__list wrapping-row__display-contents"></ul>
-          <button class="gallery__new-image-btn">+ New Image</button>
+          <button class="gallery__new-card-btn">+ New Image</button>
         </div>
       </section>
 
@@ -59,14 +59,14 @@
     </main>
 
     <template id="image-template">
-      <li class="gallery__list-item">
-        <img class="gallery__image" src="#" alt="" />
+      <li class="card">
+        <img class="card__image" src="#" alt="" />
         <button
-          class="gallery__btn gallery__btn_type_like"
+          class="card__btn card__btn_type_like"
           type="button"
         ></button>
         <button
-          class="gallery__btn gallery__btn_type_delete"
+          class="card__btn card__btn_type_delete"
           type="button"
         ></button>
       </li>

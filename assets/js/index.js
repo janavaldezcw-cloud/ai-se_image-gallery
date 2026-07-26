@@ -36,16 +36,16 @@ function renderHomeView() {
   function createImageEl(item) {
     const cloneEl = imageTemplateEl.content.querySelector("li").cloneNode(true);
 
-    const imageEl = cloneEl.querySelector(".gallery__image");
+    const imageEl = cloneEl.querySelector(".card__image");
     imageEl.src = item.src;
     imageEl.alt = item.alt;
 
-    const likeBtn = cloneEl.querySelector(".gallery__btn_type_like");
+    const likeBtn = cloneEl.querySelector(".card__btn_type_like");
     likeBtn.addEventListener("click", () => {
-      likeBtn.classList.toggle("gallery__btn_type_like-filled");
+      likeBtn.classList.toggle("card__btn_type_like-filled");
     });
 
-    const deleteBtn = cloneEl.querySelector(".gallery__btn_type_delete");
+    const deleteBtn = cloneEl.querySelector(".card__btn_type_delete");
     deleteBtn.addEventListener("click", () => {
       currentImageEl = cloneEl;
       confirmationModalEl.classList.add("modal_visible");

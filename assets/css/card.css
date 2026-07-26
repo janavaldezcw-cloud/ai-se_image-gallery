@@ -1,0 +1,45 @@
+.card {
+  position: relative;
+}
+
+.card:hover {
+  opacity: 50%;
+}
+
+.card__image {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+
+.card__btn {
+  visibility: hidden;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  bottom: 12px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.card__btn_type_like {
+  background-image: url("../images/like-icon.svg");
+  left: 12px;
+}
+
+.card__btn_type_delete {
+  background-image: url("../images/delete-icon.svg");
+  right: 12px;
+}
+
+.card__btn_type_like-filled {
+  background-image: url("../images/like-icon-filled.svg");
+}
+
+.card:hover .card__btn_type_delete {
+  visibility: visible;
+}
+
+.card:hover .card__btn_type_like {
+  visibility: visible;
+}

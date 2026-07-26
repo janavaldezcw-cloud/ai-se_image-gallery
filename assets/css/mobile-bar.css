@@ -1,5 +1,5 @@
 @media screen and (max-width: 805px) {
-  .gallery__new-image-btn {
+  .gallery__new-card-btn {
     position: fixed;
     padding: 16px 24px;
     bottom: 20px;

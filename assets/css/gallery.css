@@ -12,53 +12,7 @@
   list-style-type: none;
 }
 
-.gallery__list-item {
-  position: relative;
-}
-
-.gallery__image {
-  width: 100%;
-  border-radius: 12px;
-  display: block;
-}
-
-.gallery__btn {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  bottom: 12px;
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-.gallery__btn_type_like {
-  background-image: url("../images/like-icon.svg");
-  left: 12px;
-}
-
-.gallery__btn_type_delete {
-  background-image: url("../images/delete-icon.svg");
-  right: 12px;
-}
-
-.gallery__btn_type_like-filled {
-  background-image: url("../images/like-icon-filled.svg");
-}
-
-.gallery__list-item:hover {
-  opacity: 50%;
-}
-
-.gallery__list-item:hover .gallery__btn_type_delete {
-  visibility: visible;
-}
-
-.gallery__list-item:hover .gallery__btn_type_like {
-  visibility: visible;
-}
-
-.gallery__new-image-btn {
+.gallery__new-card-btn {
   aspect-ratio: 325 / 224;
   border-radius: 12px;
   background-color: #d9d9d9;
@@ -66,7 +20,7 @@
   font-size: 24px;
 }
 
-.gallery__new-image-btn:hover {
+.gallery__new-card-btn:hover {
   background-color: #c5c5c5;
   color: #1a1a1a;
 }
