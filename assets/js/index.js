@@ -5,6 +5,25 @@ const homeSection = document.querySelector("#home");
 const carouselSection = document.querySelector("#carousel");
 const notFoundSection = document.querySelector("#not-found");
 
+const confirmationModalEl = document.querySelector("#confirmation-modal");
+const cancelBtn = confirmationModalEl.querySelector(".modal__btn_type_cancel");
+const confirmBtn = confirmationModalEl.querySelector(
+  ".modal__btn_type_confirm",
+);
+
+let currentImageEl = null;
+
+cancelBtn.addEventListener("click", () => {
+  confirmationModalEl.classList.remove("modal_visible");
+  currentImageEl = null;
+});
+
+confirmBtn.addEventListener("click", () => {
+  currentImageEl.remove();
+  confirmationModalEl.classList.remove("modal_visible");
+  currentImageEl = null;
+});
+
 function renderHomeView() {
   homeSection.style.display = "block";
   carouselSection.style.display = "none";
@@ -28,7 +47,8 @@ function renderHomeView() {
 
     const deleteBtn = cloneEl.querySelector(".gallery__btn_type_delete");
     deleteBtn.addEventListener("click", () => {
-      cloneEl.remove();
+      currentImageEl = cloneEl;
+      confirmationModalEl.classList.add("modal_visible");
     });
 
     return cloneEl;

@@ -1,0 +1,42 @@
+.header {
+  padding-bottom: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__title {
+  font-size: 24px;
+}
+
+.header__link {
+  color: inherit;
+  font-weight: 900;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.header__link:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    padding-bottom: 42px;
+  }
+
+  .header__title {
+    font-size: 20px;
+  }
+
+  .header__link {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .header__link,
+  .header__title {
+    font-size: 16px;
+  }
+}
