@@ -1,8 +1,10 @@
+import { colorMap } from "./colorMap.js";
+
 const decks = [
   {
     id: "1",
     name: "Spanish Basics",
-    color: "#ffd9c2",
+    color: colorMap.peach,
     cards: [
       { id: "1", front: "Hello", back: "Hola" },
       { id: "2", front: "Goodbye", back: "Adiós" },
@@ -13,7 +15,7 @@ const decks = [
   {
     id: "2",
     name: "World Capitals",
-    color: "#c2e7ff",
+    color: colorMap.blue,
     cards: [
       { id: "1", front: "France", back: "Paris" },
       { id: "2", front: "Japan", back: "Tokyo" },

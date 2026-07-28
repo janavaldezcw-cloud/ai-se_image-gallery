@@ -24,6 +24,9 @@
 }
 
 .gallery__practice-btn {
+  font: inherit;
+  border: none;
+  cursor: pointer;
   padding: 12px 24px;
   border-radius: 12px;
   background-color: #1a1a1a;
@@ -42,6 +45,9 @@
 }
 
 .gallery__new-card-btn {
+  font: inherit;
+  border: none;
+  cursor: pointer;
   aspect-ratio: 325 / 224;
   border-radius: 12px;
   background-color: #d9d9d9;

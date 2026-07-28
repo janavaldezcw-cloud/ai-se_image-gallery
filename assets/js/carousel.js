@@ -1,11 +1,14 @@
-function renderCarouselView(items) {
+function renderCarouselView(deck) {
   let currentIndex = 0;
+  let isFlipped = false;
 
   const carouselEl = document.querySelector(".carousel");
+  const titleEl = carouselEl.querySelector(".carousel__title");
+  const cardEl = carouselEl.querySelector(".carousel__card");
+  const textEl = carouselEl.querySelector(".carousel__text");
   const leftBtn = carouselEl.querySelector(".carousel__btn_type_left");
   const rightBtn = carouselEl.querySelector(".carousel__btn_type_right");
-  const carouselImageEl = carouselEl.querySelector(".carousel__image");
-  const carouselTextEl = carouselEl.querySelector(".carousel__text");
+  const flipBtn = carouselEl.querySelector(".carousel__btn_type_flip");
 
   function disableButton(buttonEl) {
     buttonEl.classList.add("carousel__btn_disabled");
@@ -23,7 +26,7 @@ function renderCarouselView(items) {
       enableButton(leftBtn);
     }
 
-    if (currentIndex === items.length - 1) {
+    if (currentIndex === deck.cards.length - 1) {
       disableButton(rightBtn);
     } else {
       enableButton(rightBtn);
@@ -31,25 +34,21 @@ function renderCarouselView(items) {
   }
 
   function updateDisplay() {
-    const item = items[currentIndex];
+    const card = deck.cards[currentIndex];
 
-    if (item.src) {
-      carouselImageEl.src = item.src;
-      carouselImageEl.alt = item.alt;
-      carouselImageEl.style.display = "block";
-      carouselTextEl.style.display = "none";
-    } else {
-      carouselTextEl.textContent = item.front;
-      carouselTextEl.style.display = "flex";
-      carouselImageEl.style.display = "none";
-    }
+    titleEl.textContent =
+      `${deck.name} (${currentIndex + 1}/${deck.cards.length})`;
+    textEl.textContent = isFlipped ? card.back : card.front;
+    cardEl.classList.toggle("carousel__card_flipped", isFlipped);
+    cardEl.style.setProperty("--card-color", deck.color);
 
     updateArrows();
   }
 
   rightBtn.addEventListener("click", () => {
-    if (currentIndex < items.length - 1) {
+    if (currentIndex < deck.cards.length - 1) {
       currentIndex++;
+      isFlipped = false;
       updateDisplay();
     }
   });
@@ -57,8 +56,14 @@ function renderCarouselView(items) {
   leftBtn.addEventListener("click", () => {
     if (currentIndex > 0) {
       currentIndex--;
+      isFlipped = false;
       updateDisplay();
     }
+  });
+
+  flipBtn.addEventListener("click", () => {
+    isFlipped = !isFlipped;
+    updateDisplay();
   });
 
   updateDisplay();

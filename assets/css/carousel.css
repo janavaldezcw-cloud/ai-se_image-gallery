@@ -14,17 +14,23 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
-  grid-template-areas: "left-btn card right-btn";
+  grid-template-areas:
+    "left-btn card right-btn"
+    ".        flip .        ";
   grid-template-columns: auto minmax(0, 390px) auto;
 }
 
 .carousel__btn {
+  font: inherit;
+  border: none;
+  cursor: pointer;
   background-color: #fff;
   width: 44px;
   height: 44px;
   border-radius: 8px;
   background-repeat: no-repeat;
   background-position: center;
+  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.15);
 }
 
 .carousel__btn_type_left {
@@ -33,6 +39,22 @@
 
 .carousel__btn_type_right {
   grid-area: right-btn;
+}
+
+.carousel__btn_type_flip {
+  grid-area: flip;
+  justify-self: center;
+}
+
+.carousel__btn_type_flip::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("../images/flip-icon-dark.svg");
+  opacity: 50%;
 }
 
 .carousel__btn_type_left::before {
@@ -61,37 +83,37 @@
   opacity: 100%;
 }
 
+.carousel__btn_disabled {
+  pointer-events: none;
+}
+
 .carousel__btn_disabled::before {
   opacity: 20%;
 }
 
-.carousel__btn_disabled:hover::before {
-  opacity: 20%;
-  cursor: default;
-}
-
-.carousel__image {
+.carousel__card {
   grid-area: card;
-  max-width: 390px;
-  width: 100%;
-  border-radius: 16px;
-  display: block;
-}
-
-.carousel__text {
-  grid-area: card;
+  box-sizing: border-box;
   max-width: 390px;
   min-height: 273px;
   width: 100%;
   padding: 20px;
   border-radius: 16px;
-  background-color: #fff;
-  font-size: 24px;
-  font-weight: 700;
-  text-align: center;
+  background-color: var(--card-color, #d9d9d9);
+  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.carousel__card_flipped {
+  background-color: #fff;
+}
+
+.carousel__text {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
 }
 
 @media screen and (max-width: 600px) {
@@ -107,6 +129,7 @@
   .carousel__grid {
     grid-template-areas:
       "card card"
+      "flip flip"
       "left-btn right-btn";
     grid-template-columns: minmax(0, 195px) minmax(0, 195px);
   }

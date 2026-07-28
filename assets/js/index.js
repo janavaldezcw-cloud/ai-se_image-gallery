@@ -1,14 +1,16 @@
-import { images } from "./images.js";
+import { decks } from "./decks.js";
 import { renderCarouselView } from "./carousel.js";
-import { renderDecksView } from "./decks-view.js";
 import { renderDeckView, findDeckById } from "./deck-view.js";
 import { confirmDelete } from "./confirmation-modal.js";
 
+const pageEl = document.querySelector(".page");
 const homeSection = document.querySelector("#home");
-const decksSection = document.querySelector("#decks");
 const carouselSection = document.querySelector("#carousel");
 const deckViewSection = document.querySelector("#deck-view");
 const notFoundSection = document.querySelector("#not-found");
+
+const homeListEl = homeSection.querySelector(".gallery__list");
+const deckTemplateEl = document.querySelector("#deck-template");
 
 let currentDeck = null;
 
@@ -19,69 +21,60 @@ practiceBtn.addEventListener("click", () => {
   }
 });
 
-function renderHomeView() {
-  const imageTemplateEl = document.querySelector("#image-template");
-  const imageContainerEl = homeSection.querySelector(".gallery__list");
-  imageContainerEl.innerHTML = "";
+function createDeckEl(deck) {
+  const cloneEl = deckTemplateEl.content.querySelector("li").cloneNode(true);
+  cloneEl.style.setProperty("--card-color", deck.color);
 
-  function createImageEl(item) {
-    const cloneEl = imageTemplateEl.content.querySelector("li").cloneNode(true);
+  const linkEl = cloneEl.querySelector(".card__link");
+  linkEl.href = `#deck/${deck.id}`;
+  linkEl.setAttribute("aria-label", `Open ${deck.name} deck`);
 
-    const imageEl = cloneEl.querySelector(".card__image");
-    imageEl.src = item.src;
-    imageEl.alt = item.alt;
+  cloneEl.querySelector(".card__title").textContent = deck.name;
+  cloneEl.querySelector(".card__count").textContent =
+    `${deck.cards.length} cards`;
 
-    const likeBtn = cloneEl.querySelector(".card__btn_type_like");
-    likeBtn.addEventListener("click", () => {
-      likeBtn.classList.toggle("card__btn_type_like-filled");
-    });
+  const deleteBtn = cloneEl.querySelector(".card__action-btn_type_delete");
+  deleteBtn.addEventListener("click", () => {
+    confirmDelete(cloneEl);
+  });
 
-    const deleteBtn = cloneEl.querySelector(".card__btn_type_delete");
-    deleteBtn.addEventListener("click", () => {
-      confirmDelete(cloneEl);
-    });
-
-    return cloneEl;
-  }
-
-  function renderImageEl(item) {
-    const imageEl = createImageEl(item);
-    imageContainerEl.prepend(imageEl);
-  }
-
-  images.forEach(renderImageEl);
+  return cloneEl;
 }
 
-/**
- * Main router function that handles hash changes.
- * Reads the current hash and renders the appropriate view.
- */
+function renderHomeView() {
+  homeListEl.innerHTML = "";
+  decks.forEach((deck) => {
+    homeListEl.append(createDeckEl(deck));
+  });
+}
+
+function hideAllSections() {
+  homeSection.style.display = "none";
+  carouselSection.style.display = "none";
+  deckViewSection.style.display = "none";
+  notFoundSection.style.display = "none";
+  pageEl.classList.add("page_no-mobile-bar");
+  pageEl.classList.remove("page_location_carousel");
+}
+
 function router() {
   const hash = window.location.hash.slice(1) || "home";
   const practiceMatch = hash.match(/^deck\/(.+)\/practice$/);
   const deckMatch = hash.match(/^deck\/(.+)$/);
 
-  homeSection.style.display = "none";
-  decksSection.style.display = "none";
-  carouselSection.style.display = "none";
-  deckViewSection.style.display = "none";
-  notFoundSection.style.display = "none";
+  hideAllSections();
 
   if (hash === "home" || hash === "") {
+    pageEl.classList.remove("page_no-mobile-bar");
     homeSection.style.display = "block";
     renderHomeView();
-  } else if (hash === "decks") {
-    decksSection.style.display = "block";
-    renderDecksView();
-  } else if (hash === "carousel") {
-    carouselSection.style.display = "block";
-    renderCarouselView(images);
   } else if (practiceMatch) {
     const deck = findDeckById(practiceMatch[1]);
     if (deck) {
       currentDeck = deck;
+      pageEl.classList.add("page_location_carousel");
       carouselSection.style.display = "block";
-      renderCarouselView(deck.cards);
+      renderCarouselView(deck);
     } else {
       notFoundSection.style.display = "flex";
     }
@@ -89,6 +82,7 @@ function router() {
     const deck = findDeckById(deckMatch[1]);
     if (deck) {
       currentDeck = deck;
+      pageEl.classList.remove("page_no-mobile-bar");
       deckViewSection.style.display = "block";
       renderDeckView(deck);
     } else {
