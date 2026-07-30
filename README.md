@@ -1,68 +1,60 @@
 # Flash Cards
 
-A responsive flashcard app. Organize cards into decks, flip between question and
-answer, and practice a deck as a swipeable carousel.
+This is a flashcard app I built for my software engineering course. You can make
+decks of cards, flip them to see the answer, and practice a deck one card at a
+time like a slideshow.
 
-**Live demo:** _add your GitHub Pages link here_
-**Project pitch video:** _add your video link here_
+_
+**Project pitch video:**  ## Project Pitch Video https://drive.google.com/file/d/1P7OA6ibXlB2OV7ieT947ua1pSevKI9kY/view?usp=drive_link
+ 
+ 
 
-## Features
+## What it does
 
-- **My Decks (home view):** browse all decks, each shown with its name, card
-  count, and background color. Delete a deck with a confirmation modal.
-- **Open deck view:** see every flashcard in a deck. Flip a card to reveal its
-  answer (the card turns white), or delete it.
-- **Practice (carousel) view:** step through a deck's cards one at a time.
-  The title shows the deck name and your position (e.g. "Spanish Basics
-  (2/4)"). Flip the current card to see its answer; moving to a new card
-  always shows the question first.
-- **Responsive layout:** on screens 805px and narrower, the "new card"/"new
-  deck" and "Practice" buttons are pinned to the bottom of the screen with a
-  fade behind them, per the Figma responsive design.
-- **404 page** for unknown routes.
+- **Home page** – shows all your decks. Each one has a name, how many cards
+  are in it, and a color. You can delete a deck (it asks you to confirm first
+  so you don't do it by accident).
+- **Deck page** – click a deck to see all the cards in it. Click a card to
+  flip it and see the answer, or delete it.
+- **Practice mode** – goes through the deck one card at a time, kind of like
+  a slideshow. Shows you which card you're on (like "Spanish Basics (2/4)").
+  Flipping a card shows the answer, and moving to the next card flips it back
+  to the question.
+- Works on mobile too - the buttons stick to the bottom of the screen on
+  smaller screens.
+- If you go to a page/URL that doesn't exist it shows a little 404 page.
+
 
 ## Project structure
 
-```
-index.html
-assets/
-  css/
-    style.css       # imports every other stylesheet below, one file per BEM block
-    base.css, page.css, header.css, nav.css, gallery.css, card.css,
-    wrapping-row.css, carousel.css, not-found.css, footer.css, modal.css
-    mobile-bar.css   # fixed buttons + gradient for small screens
-  js/
-    index.js         # router, home (decks) view, practice-button wiring
-    decks.js          # deck/card data
-    colorMap.js        # deck color name -> hex value lookup
-    deck-view.js      # open deck view (flashcards, flip, delete)
-    carousel.js         # practice/carousel view
-    confirmation-modal.js  # shared delete-confirmation modal logic
-  images/            # icons (flip, delete, arrows)
-  vendor/
-    normalize.css    # third-party CSS reset, linked before style.css
-favicon.ico
-```
+Everything HTML-wise is in one `index.html` file (all the views live there,
+and JS shows/hides them). Styles are split up by component in `assets/css/`,
+and each one gets imported into `assets/css/style.css`. JS is split up too:
+
+- `index.js` - handles the routing (which page shows based on the URL) and
+  the home page
+- `decks.js` - this is just the deck/card data, kept it separate so it's easy
+  to find and change
+- `deck-view.js` - the page that shows one deck's cards
+- `carousel.js` - the practice mode
+- `confirmation-modal.js` - the "are you sure you want to delete this" popup,
+  used in a couple places so I didn't want to write it twice
+- `colorMap.js` - small helper that turns a color name into an actual hex code
 
 ## Routing
 
-| Hash | View |
-|---|---|
-| `#home` (or empty) | My Decks |
-| `#deck/<id>` | Open deck view for that deck |
-| `#deck/<id>/practice` | Carousel/practice view for that deck |
-| anything else | 404 page |
+I used the URL hash to switch between pages instead of a real router:
 
-## Changes in Parts 4 and 5
+- `#home` (or nothing) → home page
+- `#deck/<id>` → that deck's page
+- `#deck/<id>/practice` → practice mode for that deck
+- anything else → 404 page
 
-- **Part 4:** rebuilt the deck/flashcard feature on top of the original
-  image-gallery scaffold — added the dynamic `#deck/<id>` route, the open
-  deck view (flip/delete flashcards), and a shared confirmation modal.
-- **Part 5:** implemented the responsive design end-to-end (home, open deck,
-  and carousel views, plus the fixed mobile button/footer treatment); merged
-  the home view into the decks list per the project's actual data model
-  (removing the leftover photo-gallery view from the starting template);
-  added `colorMap.js`, `normalize.css`, `.prettierignore`, and `favicon.ico`
-  to match the file-structure requirements; added box shadows to cards and
-  the carousel; rewrote the carousel to show flippable flashcard text
-  (with a dynamic deck-name/position title) instead of static photos.
+## Notes / what I'd still like to improve
+
+This started from a starter template for a photo gallery project, so some of
+the structure (like the BEM class names) comes from that. I ended up
+reworking most of it to fit the flashcard idea instead. If I had more time I'd
+probably add a way to actually create new decks/cards through the UI instead
+of editing `decks.js` by hand, and maybe save decks to localStorage so they
+don't reset on refresh.
