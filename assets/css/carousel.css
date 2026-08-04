@@ -30,7 +30,10 @@
   border-radius: 8px;
   background-repeat: no-repeat;
   background-position: center;
-  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.15);
+  box-shadow:
+    0px 2px 8px 0px #0000001a,
+    -1px 2px 2px 0px #ffffffb2 inset,
+    1px -1px 2px 0px #00000040 inset;
 }
 
 .carousel__btn_type_left {
@@ -95,12 +98,15 @@
   grid-area: card;
   box-sizing: border-box;
   max-width: 390px;
-  min-height: 273px;
+  aspect-ratio: 390 / 273;
   width: 100%;
   padding: 20px;
   border-radius: 16px;
   background-color: var(--card-color, #d9d9d9);
-  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.15);
+  box-shadow:
+    0px 2px 8px 0px #0000001a,
+    -1px 2px 2px 0px #ffffffb2 inset,
+    1px -1px 2px 0px #00000040 inset;
   display: flex;
   align-items: center;
   justify-content: center;

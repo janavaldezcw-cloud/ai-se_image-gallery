@@ -4,10 +4,8 @@ This is a flashcard app I built for my software engineering course. You can make
 decks of cards, flip them to see the answer, and practice a deck one card at a
 time like a slideshow.
 
-_
-**Project pitch video:**  ## Project Pitch Video https://drive.google.com/file/d/1P7OA6ibXlB2OV7ieT947ua1pSevKI9kY/view?usp=drive_link
- 
- 
+**Live demo:** _add your GitHub Pages link here_
+**Project pitch video:** https://drive.google.com/file/d/1P7OA6ibXlB2OV7ieT947ua1pSevKI9kY/view?usp=drive_link
 
 ## What it does
 
