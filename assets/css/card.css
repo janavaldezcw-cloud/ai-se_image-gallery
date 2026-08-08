@@ -4,11 +4,11 @@
 
 .card_type_flashcard,
 .card_type_deck {
-  aspect-ratio: 325 / 224;
+  height: 205px;
   display: flex;
   flex-direction: column;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 20px;
   background-color: var(--card-color, #d9d9d9);
   box-shadow:
     0px 2px 8px 0px #0000001a,
@@ -22,7 +22,7 @@
 }
 
 .card_type_deck {
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .card_type_flashcard.card_flipped {
@@ -31,8 +31,9 @@
 
 .card_type_flashcard .card__title {
   margin: auto 0;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .card__row {
@@ -75,13 +76,15 @@
 .card_type_deck .card__title {
   position: relative;
   margin-bottom: 4px;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .card__count {
-  font-size: 14px;
-  color: #1a1a1a80;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #1a1a1a;
 }
 
 .card_type_deck .card__row {

@@ -48,11 +48,13 @@
   font: inherit;
   border: none;
   cursor: pointer;
-  aspect-ratio: 325 / 224;
-  border-radius: 12px;
+  height: 205px;
+  border-radius: 20px;
   background-color: #d9d9d9;
   color: #1a1a1a80;
   font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .gallery__new-card-btn:hover {
