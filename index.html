@@ -22,7 +22,8 @@
       </h1>
       <nav class="nav">
         <ul class="nav__links">
-          <li><a href="#home" class="nav__link">My decks</a></li>
+          <li><a href="#home" class="nav__link">My Decks</a></li>
+          <li><a href="#about" class="nav__link">About</a></li>
         </ul>
       </nav>
     </header>
@@ -57,25 +58,36 @@
       <section id="carousel" class="carousel">
         <h2 class="carousel__title"></h2>
         <div class="carousel__grid">
-          <button
-            type="button"
-            aria-label="Go to previous card"
-            class="carousel__btn carousel__btn_type_left"
-          ></button>
           <div class="carousel__card">
             <p class="carousel__text"></p>
           </div>
-          <button
-            type="button"
-            aria-label="Flip card"
-            class="carousel__btn carousel__btn_type_flip"
-          ></button>
-          <button
-            type="button"
-            aria-label="Go to next card"
-            class="carousel__btn carousel__btn_type_right"
-          ></button>
+          <div class="carousel__buttons">
+            <button
+              type="button"
+              aria-label="Go to previous card"
+              class="carousel__btn carousel__btn_type_left"
+            ></button>
+            <button
+              type="button"
+              aria-label="Flip card"
+              class="carousel__btn carousel__btn_type_flip"
+            ></button>
+            <button
+              type="button"
+              aria-label="Go to next card"
+              class="carousel__btn carousel__btn_type_right"
+            ></button>
+          </div>
         </div>
+      </section>
+
+      <section id="about" class="gallery">
+        <h2 class="gallery__title">About</h2>
+        <p>
+          Flash Cards is a study app for organizing what you're learning into
+          decks of flashcards. Group related questions together, flip a card
+          to check the answer, and practice a deck one card at a time.
+        </p>
       </section>
 
       <section id="not-found" class="not-found">

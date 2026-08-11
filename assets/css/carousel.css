@@ -3,9 +3,10 @@
 }
 
 .carousel__title {
-  font-weight: 700;
-  font-size: 32px;
-  margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #1a1a1a80;
+  margin-bottom: 32px;
   text-align: center;
 }
 
@@ -18,6 +19,10 @@
     "left-btn card right-btn"
     ".        flip .        ";
   grid-template-columns: auto minmax(0, 390px) auto;
+}
+
+.carousel__buttons {
+  display: contents;
 }
 
 .carousel__btn {
@@ -131,16 +136,23 @@
     padding: 0;
   }
 
-  .carousel__title {
-    font-size: 32px;
-    margin-bottom: 20px;
-  }
-
   .carousel__grid {
     grid-template-areas:
-      "card card"
-      "flip flip"
-      "left-btn right-btn";
-    grid-template-columns: minmax(0, 195px) minmax(0, 195px);
+      "card"
+      "buttons";
+    grid-template-columns: minmax(0, 390px);
+    gap: 32px;
+  }
+
+  .carousel__card {
+    aspect-ratio: 353 / 420;
+  }
+
+  .carousel__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-area: buttons;
+    width: 100%;
   }
 }
