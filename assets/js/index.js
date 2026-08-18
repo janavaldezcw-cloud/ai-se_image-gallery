@@ -8,6 +8,7 @@ const homeSection = document.querySelector("#home");
 const carouselSection = document.querySelector("#carousel");
 const deckViewSection = document.querySelector("#deck-view");
 const aboutSection = document.querySelector("#about");
+const newDeckViewSection = document.querySelector("#new-deck-view");
 const notFoundSection = document.querySelector("#not-found");
 
 const homeListEl = homeSection.querySelector(".gallery__list");
@@ -20,6 +21,11 @@ practiceBtn.addEventListener("click", () => {
   if (currentDeck) {
     window.location.hash = `deck/${currentDeck.id}/practice`;
   }
+});
+
+const newDeckBtn = document.querySelector("#home .gallery__new-card-btn");
+newDeckBtn.addEventListener("click", () => {
+  window.location.hash = "new-deck";
 });
 
 function createDeckEl(deck) {
@@ -54,6 +60,7 @@ function hideAllSections() {
   carouselSection.style.display = "none";
   deckViewSection.style.display = "none";
   aboutSection.style.display = "none";
+  newDeckViewSection.style.display = "none";
   notFoundSection.style.display = "none";
   pageEl.classList.add("page_no-mobile-bar");
   pageEl.classList.remove("page_location_carousel");
@@ -72,6 +79,8 @@ function router() {
     renderHomeView();
   } else if (hash === "about") {
     aboutSection.style.display = "block";
+  } else if (hash === "new-deck") {
+    newDeckViewSection.style.display = "block";
   } else if (practiceMatch) {
     const deck = findDeckById(practiceMatch[1]);
     if (deck) {
