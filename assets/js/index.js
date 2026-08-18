@@ -2,6 +2,7 @@ import { decks } from "./decks.js";
 import { renderCarouselView } from "./carousel.js";
 import { renderDeckView, findDeckById } from "./deck-view.js";
 import { confirmDelete } from "./confirmation-modal.js";
+import { disableSubmitBtn } from "./new-deck-view.js";
 
 const pageEl = document.querySelector(".page");
 const homeSection = document.querySelector("#home");
@@ -81,6 +82,7 @@ function router() {
     aboutSection.style.display = "block";
   } else if (hash === "new-deck") {
     newDeckViewSection.style.display = "block";
+    disableSubmitBtn();
   } else if (practiceMatch) {
     const deck = findDeckById(practiceMatch[1]);
     if (deck) {
