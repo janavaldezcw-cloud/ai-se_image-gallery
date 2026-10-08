@@ -26,6 +26,3 @@ async function getDeck(id) {
 
 
 const baseUrl = "https://se-flashcards-api.en.tripleten-services.com/v1";
-
-
-    c

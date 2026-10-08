@@ -3,6 +3,7 @@ import { renderCarouselView } from "./carousel.js";
 import { renderDeckView, findDeckById } from "./deck-view.js";
 import { confirmDelete } from "./confirmation-modal.js";
 import { disableSubmitBtn } from "./new-deck-view.js";
+import { getDecks, getDeck } from "./api.js";
 
 const pageEl = document.querySelector(".page");
 const homeSection = document.querySelector("#home");
@@ -108,5 +109,16 @@ function router() {
   }
 }
 
-window.addEventListener("DOMContentLoaded", router);
+window.addEventListener("DOMContentLoaded", () => {
+  getDecks()
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+    .finally(() => {
+      router();
+    });
+});
 window.addEventListener("hashchange", router);
