@@ -1,6 +1,6 @@
-import { decks } from "./decks.js";
+import { fetchedDecks, getDeckByID } from "./decks.js";
 import { renderCarouselView } from "./carousel.js";
-import { renderDeckView, findDeckById } from "./deck-view.js";
+import { renderDeckView } from "./deck-view.js";
 import { confirmDelete } from "./confirmation-modal.js";
 import { disableSubmitBtn } from "./new-deck-view.js";
 import { getDecks, getDeck } from "./api.js";
@@ -21,7 +21,7 @@ let currentDeck = null;
 const practiceBtn = deckViewSection.querySelector(".gallery__practice-btn");
 practiceBtn.addEventListener("click", () => {
   if (currentDeck) {
-    window.location.hash = `deck/${currentDeck.id}/practice`;
+    window.location.hash = `deck/${currentDeck._id}/practice`;
   }
 });
 
@@ -35,7 +35,7 @@ function createDeckEl(deck) {
   cloneEl.style.setProperty("--card-color", deck.color);
 
   const linkEl = cloneEl.querySelector(".card__link");
-  linkEl.href = `#deck/${deck.id}`;
+  linkEl.href = `#deck/${deck._id}`;
   linkEl.setAttribute("aria-label", `Open ${deck.name} deck`);
 
   cloneEl.querySelector(".card__title").textContent = deck.name;
@@ -52,7 +52,7 @@ function createDeckEl(deck) {
 
 function renderHomeView() {
   homeListEl.innerHTML = "";
-  decks.forEach((deck) => {
+  fetchedDecks.forEach((deck) => {
     homeListEl.append(createDeckEl(deck));
   });
 }
@@ -85,7 +85,7 @@ function router() {
     newDeckViewSection.style.display = "block";
     disableSubmitBtn();
   } else if (practiceMatch) {
-    const deck = findDeckById(practiceMatch[1]);
+    const deck = getDeckByID(practiceMatch[1]);
     if (deck) {
       currentDeck = deck;
       pageEl.classList.add("page_location_carousel");
@@ -95,7 +95,7 @@ function router() {
       notFoundSection.style.display = "flex";
     }
   } else if (deckMatch) {
-    const deck = findDeckById(deckMatch[1]);
+    const deck = getDeckByID(deckMatch[1]);
     if (deck) {
       currentDeck = deck;
       pageEl.classList.remove("page_no-mobile-bar");
@@ -112,7 +112,7 @@ function router() {
 window.addEventListener("DOMContentLoaded", () => {
   getDecks()
     .then((data) => {
-      console.log(data);
+      fetchedDecks.push(...data);
     })
     .catch((error) => {
       console.error(error);

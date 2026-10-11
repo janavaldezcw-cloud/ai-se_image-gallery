@@ -1,4 +1,3 @@
-import { decks } from "./decks.js";
 import { confirmDelete } from "./confirmation-modal.js";
 
 const deckViewSection = document.querySelector("#deck-view");
@@ -13,13 +12,13 @@ function createCardEl(deck, card) {
   cloneEl.style.setProperty("--card-color", deck.color);
 
   const cardTitleEl = cloneEl.querySelector(".card__title");
-  cardTitleEl.textContent = card.front;
+  cardTitleEl.textContent = card.question;
   let isFlipped = false;
 
   const flipBtn = cloneEl.querySelector(".card__action-btn_type_flip");
   flipBtn.addEventListener("click", () => {
     isFlipped = !isFlipped;
-    cardTitleEl.textContent = isFlipped ? card.back : card.front;
+    cardTitleEl.textContent = isFlipped ? card.answer : card.question;
     cloneEl.classList.toggle("card_flipped", isFlipped);
   });
 
@@ -39,8 +38,4 @@ function renderDeckView(deck) {
   });
 }
 
-function findDeckById(id) {
-  return decks.find((deck) => deck.id === id);
-}
-
-export { renderDeckView, findDeckById };
+export { renderDeckView };

@@ -38,7 +38,7 @@ function renderCarouselView(deck) {
 
     titleEl.textContent =
       `${deck.name} · ${currentIndex + 1}/${deck.cards.length}`;
-    textEl.textContent = isFlipped ? card.back : card.front;
+    textEl.textContent = isFlipped ? card.answer : card.question;
     cardEl.classList.toggle("carousel__card_flipped", isFlipped);
     cardEl.style.setProperty("--card-color", deck.color);
 

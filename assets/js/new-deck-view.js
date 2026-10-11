@@ -1,4 +1,4 @@
-import { decks } from "./decks.js";
+import { fetchedDecks } from "./decks.js";
 
 const HEX_DIGITS = /^[0-9a-fA-F]{6}$/;
 
@@ -108,13 +108,13 @@ formEl.addEventListener("submit", (e) => {
   const id = `${slugify(name)}-${Date.now()}`;
 
   const deck = {
-    id,
+    _id: id,
     color: colorValue,
     name,
     cards: jsonData.cards,
   };
 
-  decks.push(deck);
+  fetchedDecks.push(deck);
 
   window.location.hash = "deck/" + id;
 });
